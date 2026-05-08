@@ -1,0 +1,18 @@
+journal:
+    create new entry
+    display the current journal class
+    save to file
+        file to write to
+    load from file
+entry: 
+    display the prompt
+    store the answer (includes:)
+        date
+        prompt
+        response
+
+prompt generator: 
+    select prompt at random
+        list of prompts
+    mark as already selected (array index?)
+        list of used prompts
