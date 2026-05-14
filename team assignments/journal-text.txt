@@ -3,6 +3,7 @@ journal:
     display the current journal class
     save to file
         file to write to
+        date
     load from file
 entry: 
     display the prompt
