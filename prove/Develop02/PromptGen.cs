@@ -4,7 +4,7 @@ public class PromptGen()
     public List<int> _used = new List<int>();
     public string _current;
     private Random rnd = new Random();
-    private void Init()
+    public void Init()
     {
         _used = new List<int>(new int[15]);
         _new = new List<string>
@@ -29,11 +29,19 @@ public class PromptGen()
     public void Pick()
     {
         int i = rnd.Next(_new.Count);
-        while (_used[i] == 1)
+        int k = 0;
+        while (_used[i] == 1 && k < 15)
         {
             i = rnd.Next(_new.Count);
         }
         _current = _new[i];
         _used[i] = 1;
+        if (k > 14)
+        {
+            foreach (int j in _used)
+            {
+                _used[j] = 0;
+            }
+        }
     }
 }
