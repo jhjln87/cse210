@@ -1,6 +1,8 @@
 using System;
 using System.Runtime.Serialization;
 
+
+// What have I done to exceed? First journal prompt is always asking for mood of the day, to set off the journal. Added failsafes to the load/save features for more mistake-proof. Added "used" list to deter repeated prompts in a single journal. Slightly modified the way journal would display in console to look better.
 class Program
 {
     static void Main(string[] args)
