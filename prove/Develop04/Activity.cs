@@ -46,14 +46,14 @@ public class Activity
         Console.WriteLine($"Welcome to the {_activityName} \n\nThis activity will help you{_activityDescription}\n\nHow long, in seconds, would you like for your session?");
         _activityDuration = int.Parse(Console.ReadLine());
     }
-    public async IAsyncEnumerable<int> Counter(int duration) //**this one probably needs more research and edits in the main program**
-    {
-        for (int i = duration; i > 0; i--)
-        {
-            await Task.Delay(1000);
-            yield return i; 
-        }
-    }
+    // public async IAsyncEnumerable<int> Counter(int duration) //**this one probably needs more research and edits in the main program**
+    // {
+    //     for (int i = duration; i > 0; i--)
+    //     {
+    //         await Task.Delay(1000);
+    //         yield return i; 
+    //     }
+    // }
     // public void Counter(int duration)
     // {
     //     for (int i = duration; i > 0; i--)

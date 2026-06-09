@@ -4,8 +4,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        Activity foo = new Activity();
-        foo.Spinner(4);
-        Console.Write("sdjfgsd");
+        Breathing foo = new Breathing("breath", "fehfsdh", 20);
+        foo.Full();
+        Console.Write("done");
     }
 }
