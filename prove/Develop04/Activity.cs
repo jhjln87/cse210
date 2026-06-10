@@ -41,7 +41,7 @@ public class Activity
         Console.SetCursorPosition(0, currentLine);
     }
 
-    public void ActivityPrompt()
+    public void RequestTime()
     {
         Console.WriteLine($"Welcome to the {_activityName} \n\nThis activity will help you{_activityDescription}\n\nHow long, in seconds, would you like for your session?");
         _activityDuration = int.Parse(Console.ReadLine());
@@ -66,7 +66,6 @@ public class Activity
     private List<string> _iterations = ["-", "\\", "|", "/"];
     public void Spinner(double seconds)
     {
-        Console.WriteLine("Get ready...");
         for (int i = 0; i < seconds*8; i++)
         {
             Console.Write($"{_iterations[i % _iterations.Count()]}");
