@@ -56,8 +56,8 @@ public class Breathing : Activity
             }
         Console.WriteLine("\nWell done");
         Thread.Sleep(1000);
-        Console.Write($"You have completed another {_activityDuration} seconds of the {_activityName} activity");
-        Thread.Sleep(3000);
+        Console.Write($"You have completed another {_activityDuration} seconds of the {_activityName} activity  ");
+        Spinner(3);
         Console.Clear();
     }
 }

@@ -68,9 +68,8 @@ public class Activity
     {
         for (int i = 0; i < seconds*8; i++)
         {
-            Console.Write($"{_iterations[i % _iterations.Count()]}");
+            Console.Write($"\b{_iterations[i % _iterations.Count()]}");
             Thread.Sleep(125);
-            ClearCurrentLine();
         }
     }
 }
