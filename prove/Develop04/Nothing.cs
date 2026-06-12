@@ -1,5 +1,9 @@
 public class Nothing : Activity
 {
+    public Nothing() : base("Meditation", "", 0)
+    {
+        _activityDescription = "This activity will encourage you to pause and observe the environment around you by doing nothing for an amount of time. This activity is best done after the Breathing activity.";
+    }
     public Nothing(string activityName, string activityDescription) :base(activityName, activityDescription, 60)
     {
     }
@@ -9,11 +13,7 @@ public class Nothing : Activity
     Random rand = new Random();
     public void Full()
     {
-        Console.Clear();
-        RequestTime();
-        Console.Clear();
-        Console.WriteLine("Get ready...");
-        Spinner(3, 8);
+        Begin();
         for (int j = 0; j < (_activityDuration / 6); j++)
         {
             Console.Clear();
@@ -39,7 +39,10 @@ public class Nothing : Activity
         }
         Spinner(_activityDuration % 6, 4);
         Console.Clear();
-        Console.WriteLine($"Well done, you have completed the {_activityName} Activity");
+        Console.WriteLine("\nWell done");
+        Thread.Sleep(1000);
+        Console.Write($"You have completed another {_activityDuration} seconds of the {_activityName} activity  ");
         Spinner(3, 8);
+        Console.Clear();
     }
 }

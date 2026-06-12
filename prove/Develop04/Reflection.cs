@@ -2,6 +2,11 @@ public class Reflection : Activity
 {
     private List<string> _prompts = new List<string>();
     private List<string> _follows = new List<string>();
+    public Reflection() : base("Reflecting", "", 0)
+    {
+        InitAllPrompts();
+        _activityDescription = "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.";
+    }
     public Reflection(string activityName, string activityDescription) :base(activityName, activityDescription, 60)
     {
         InitAllPrompts();
@@ -52,12 +57,9 @@ public class Reflection : Activity
 
     public void Full()
     {
-        Console.Clear();
-        RequestTime();
-        Console.WriteLine("Get ready...");
-        Spinner(3, 8);
-        Console.Clear();
-        Console.WriteLine($"Consider the following prompt\n\n --- {GetPrompt()} --- \n\nWhen you have something in mind, press enter to continue.");
+        Begin();
+        string p = GetPrompt();
+        Console.WriteLine($"Consider the following prompt\n\n --- {p} --- \n\nWhen you have something in mind, press enter to continue.");
         Console.ReadLine();
         Console.WriteLine("Now ponder on each of the following questions as they relate to this experience\n");
         for (int i = 5; i > 0; i--)
@@ -67,9 +69,14 @@ public class Reflection : Activity
             ClearCurrentLine();
         }
         Console.Clear();
+        Console.WriteLine(p);
         int timer2 = 0;
         while (timer2 < _activityDuration)
         {
+            if (_follows.Count() == 0)
+            {
+                InitAllPrompts();
+            }
             string follow = GetFollowUp();
             _follows.Remove(follow);
             Console.Write($"> {follow}  ");

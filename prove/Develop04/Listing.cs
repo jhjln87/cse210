@@ -1,5 +1,10 @@
 public class Listing : Activity
 {
+    public Listing() : base("Listing", "", 0)
+    {
+        InitResponses();
+        _activityDescription = "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.";
+    }
     public Listing(string activityName, string activityDescription) :base(activityName, activityDescription, 60)
     {
         InitResponses();
@@ -32,11 +37,7 @@ public class Listing : Activity
     }
     public void Full()
     {
-        Console.Clear();
-        RequestTime();
-        Console.WriteLine("Get ready...");
-        Spinner(3, 8);
-        Console.Clear();
+        Begin();
         Console.Write($"List as many responses as you can to the following prompt: \n --- {GetPrompt()} --- \nYou may begin in: ");
         Console.Write("10");
         Thread.Sleep(1000);

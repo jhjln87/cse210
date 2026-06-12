@@ -43,8 +43,11 @@ public class Activity
 
     public void RequestTime()
     {
-        Console.WriteLine($"Welcome to the {_activityName} \n\nThis activity will help you {_activityDescription}\n\nHow long, in seconds, would you like for your session?");
-        _activityDuration = int.Parse(Console.ReadLine());
+        Console.WriteLine($"Welcome to the {_activityName} Activity. \n\nThis activity will help you {_activityDescription}\n\nHow long, in seconds, would you like for your session?");
+        if (int.TryParse(Console.ReadLine(), out int temp))
+        {
+           _activityDuration = temp;
+        }
     }
     // public async IAsyncEnumerable<int> Counter(int duration) //**this one probably needs more research and edits in the main program**
     // {
@@ -71,5 +74,13 @@ public class Activity
             Console.Write($"\b{_iterations[i % _iterations.Count()]}");
             Thread.Sleep(1000/rps);
         }
+    }
+    public void Begin()
+    {
+        Console.Clear();
+        RequestTime();
+        Console.WriteLine("Get ready...");
+        Spinner(3, 8);
+        Console.Clear();
     }
 }
