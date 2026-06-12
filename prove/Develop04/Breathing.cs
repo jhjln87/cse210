@@ -6,30 +6,33 @@ public class Breathing : Activity
     public Breathing(string activityName, string activityDescription, int activityDuration) :base(activityName, activityDescription, activityDuration)
     {
     }
-    private int _inLength = 5;
-    private int _outLength = 5;
+    private int _inLength = 6;
+    private int _outLength = 6;
     private void BreatheIn(int seconds)
     {
-        for (int i = seconds; i > 0; i--)
+        for (int i = 0; i < seconds*10; i++)
         {
             Console.Clear();
-            Console.Write($"Breathe in...{i}");
-            Thread.Sleep(1000);
+            Console.Write($"Breathe in...{Math.Round(2.8+Math.Cos(i/14)-1)}");
+            Thread.Sleep(100);
         }
     }
     private void BreatheOut(int seconds)
     {
-        for (int i = seconds; i > 0; i--)
+        for (int i = 0; i < seconds*10; i++)
         {
             Console.Clear();
-            Console.Write($"Breathe out...{i}");
-            Thread.Sleep(1000);
+            Console.Write($"Breathe out...{Math.Round(2.8+Math.Cos(i/14)-1)}");
+            Thread.Sleep(100);
         }
     }
     public void Full()
     {
+        Console.Clear();
+        RequestTime();
         Console.WriteLine("Get ready...");
-        Spinner(3);
+        Spinner(3, 8);
+        Console.Clear();
         int timer = _activityDuration;
         while (timer > 0)
             {
@@ -57,7 +60,7 @@ public class Breathing : Activity
         Console.WriteLine("\nWell done");
         Thread.Sleep(1000);
         Console.Write($"You have completed another {_activityDuration} seconds of the {_activityName} activity  ");
-        Spinner(3);
+        Spinner(3, 8);
         Console.Clear();
     }
 }

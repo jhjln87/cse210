@@ -4,7 +4,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        Reflection foo = new Reflection("reflect", "fehfsdh", 26);
+        Breathing foo = new Breathing("nahh", "fehfsdh");
         foo.Full();
     }
 }

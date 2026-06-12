@@ -52,6 +52,11 @@ public class Reflection : Activity
 
     public void Full()
     {
+        Console.Clear();
+        RequestTime();
+        Console.WriteLine("Get ready...");
+        Spinner(3, 8);
+        Console.Clear();
         Console.WriteLine($"Consider the following prompt\n\n --- {GetPrompt()} --- \n\nWhen you have something in mind, press enter to continue.");
         Console.ReadLine();
         Console.WriteLine("Now ponder on each of the following questions as they relate to this experience\n");
@@ -70,7 +75,7 @@ public class Reflection : Activity
             Console.Write($"> {follow}  ");
             for (int j = 0; j < 10; j++)
             {
-                Spinner(1);
+                Spinner(1, 8);
                 timer2++;
                 if (timer2 >= _activityDuration)
                 {
@@ -87,7 +92,7 @@ public class Reflection : Activity
         Console.WriteLine("\nWell done");
         Thread.Sleep(1000);
         Console.Write($"You have completed another {_activityDuration} seconds of the {_activityName} activity.  ");
-        Spinner(3);
+        Spinner(3, 8);
         Console.Clear();
     }
 }

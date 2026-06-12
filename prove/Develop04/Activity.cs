@@ -43,7 +43,7 @@ public class Activity
 
     public void RequestTime()
     {
-        Console.WriteLine($"Welcome to the {_activityName} \n\nThis activity will help you{_activityDescription}\n\nHow long, in seconds, would you like for your session?");
+        Console.WriteLine($"Welcome to the {_activityName} \n\nThis activity will help you {_activityDescription}\n\nHow long, in seconds, would you like for your session?");
         _activityDuration = int.Parse(Console.ReadLine());
     }
     // public async IAsyncEnumerable<int> Counter(int duration) //**this one probably needs more research and edits in the main program**
@@ -64,12 +64,12 @@ public class Activity
     //     }
     // }
     private List<string> _iterations = ["-", "\\", "|", "/"];
-    public void Spinner(double seconds)
+    public void Spinner(double seconds, int rps)
     {
-        for (int i = 0; i < seconds*8; i++)
+        for (int i = 0; i < seconds*rps; i++)
         {
             Console.Write($"\b{_iterations[i % _iterations.Count()]}");
-            Thread.Sleep(125);
+            Thread.Sleep(1000/rps);
         }
     }
 }
