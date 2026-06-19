@@ -18,12 +18,33 @@ public abstract class Goal
         _description = description;
         _points = pointsWorth;
     }
-    protected int RecordEvent()
+    protected int GetPoints()
     {
         return _points;
     }
-    protected bool IsComplete()
+    protected void SetComplete()
+    {
+        _isComplete = true;
+    }
+    public virtual int RecordEvent()
+    {
+        _isComplete = true;
+        return _points;
+    }
+    public bool IsComplete()
     {
         return _isComplete;
+    }
+    public virtual string GetGoalDetails(bool save = false)
+    {
+        if (save)
+        {
+            return $"{GetType()}|{_title}|{_description}|{_points}|";
+        }
+        if (IsComplete())
+        {
+            return $"[X] {_title} ({_description})";
+        }
+        return $"[ ] {_title} ({_description})";
     }
 }
