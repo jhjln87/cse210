@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 
 class Program
 {
@@ -12,6 +13,7 @@ class Program
             switch (myProgram.ActionQuery())
             {
                 case 1:
+                    myProgram.NewGoal();
                     break;
                 case 2:
                     myProgram.DisplayGoals();
@@ -58,6 +60,8 @@ void DisplayGoals()
         {
             Console.WriteLine(i.GetGoalDetails());
         }
+        Console.Write("Press any key to continue");
+        Console.ReadKey();
     }
 void NewGoal()
     {
@@ -68,13 +72,48 @@ void NewGoal()
             Console.WriteLine($"The types of goals are:\n1. Simple Goal\n2. Eternal Goal\n3. Checklist Goal\nWhich type of goal would you like to create? (select a number from the menu)");
             selected = ValidNum(1, 3);
         }
+        Console.Write("What is the name of your goal? ");
+        string name = Console.ReadLine();
+        Console.Write("Please give a short description of it, leave blank if no description is needed: ");
+        string desc = Console.ReadLine();
+        int point = -1;
         switch (selected)
         {
             case 1:
+                while (point == -1)
+                {
+                    Console.Write("What is the amount of points rewarded after this goal is complete? ");
+                    point = ValidNum(1, 2147483647);
+                }
+                _goals.Add(new Simple(name, desc, point));
                 break;
             case 2:
+                while (point == -1)
+                {
+                    Console.Write("What amount of points should be rewarded after every completion? ");
+                    point = ValidNum(1, 2147483647);
+                }
+                _goals.Add(new Eternal(name, desc, point));
                 break;
             case 3:
+                while (point == -1)
+                {
+                    Console.Write("What amount of points should be awarded after a single completion? ");
+                    point = ValidNum(1, 2147483647);
+                }
+                int max = -1;
+                while (max == -1)
+                {
+                    Console.Write("How many times should this goal be completed? ");
+                    max = ValidNum(1, 2147483647);
+                }
+                int bonus = -1;
+                while (bonus == -1)
+                {
+                    Console.Write("And how many points are awarded at the bonus? ");
+                    bonus = ValidNum(1, 2147483647);
+                }
+                _goals.Add(new Checklist(name, desc, point, bonus, 0, max));
                 break;
         }
     }
