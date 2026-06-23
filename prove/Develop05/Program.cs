@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.IO; 
 
 class Program
 {
@@ -22,7 +23,7 @@ class Program
                     myProgram.AwaitInput();
                     break;
                 case 3:
-                    
+                    myProgram.SaveFile();
                     myProgram.AwaitInput();
                     break;
                 case 4:
@@ -156,6 +157,22 @@ class Program
         else
         {
             Console.WriteLine("Could not find any goals to record.");
+        }
+    }
+    void SaveFile()
+    {
+        Console.Write("What is the filename for the goal file? ");
+        string save = Console.ReadLine();
+        if (!save.Contains(".txt"))
+        {
+            save += ".txt";
+        }
+        using (StreamWriter outputFile = new StreamWriter(save))
+        {
+            foreach(Goal i in _goals)
+            {
+                outputFile.WriteLine(i.GetGoalDetails(save:true));
+            }
         }
     }
 }
