@@ -27,7 +27,7 @@ class Program
                     myProgram.AwaitInput();
                     break;
                 case 4:
-                
+                    myProgram.LoadFile();
                     myProgram.AwaitInput();
                     break;
                 case 5:
@@ -172,6 +172,33 @@ class Program
             foreach(Goal i in _goals)
             {
                 outputFile.WriteLine(i.GetGoalDetails(save:true));
+            }
+        }
+    }
+    void LoadFile()
+    {
+        Console.Write("What is the filename for the goal file? ");
+        string load = Console.ReadLine();
+        if (!load.Contains(".txt"))
+        {
+            load += ".txt";
+        }
+        string[] lines = System.IO.File.ReadAllLines(load);
+
+        foreach (string line in lines)
+        {
+            string[] parts = line.Split("|");
+            switch (parts[0])
+            {
+                case "Simple":
+                    break;
+                case "Eternal":
+                    break;
+                case "Checklist":
+                    break;
+                default:
+                    // do something uhh
+                    break;
             }
         }
     }
