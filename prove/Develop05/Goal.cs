@@ -35,8 +35,12 @@ public abstract class Goal
     {
         return _isComplete;
     }
-    public virtual string GetGoalDetails(bool save = false)
+    public virtual string GetGoalDetails(bool save = false, bool record = false)
     {
+        if (record)
+        {
+            return _title;
+        }
         if (save)
         {
             return $"{GetType()}|{_title}|{_description}|{_points}|";
