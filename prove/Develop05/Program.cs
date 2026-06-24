@@ -5,8 +5,8 @@ using System.IO;
 class Program
 {
     int _score = 0;
-    int _level;
-    int _temp;
+    int _level = 1;
+    int _temp = 1;
     List<Goal> _goals = new List<Goal>();
     bool _play = true;
     static void Main(string[] args)
@@ -34,7 +34,6 @@ class Program
                     myProgram.AwaitInput();
                     break;
                 case 5:
-                    myProgram._temp = myProgram._level;
                     myProgram.LogEvent();
                     myProgram.AwaitInput();
                     break;
@@ -57,6 +56,7 @@ class Program
         if (int.TryParse(input, out int parsed) && parsed >= min && parsed <= max) {return parsed;} 
         else
         {
+            Console.Clear();
             Console.WriteLine($"\nInvalid selection. Please choose a number between {min} and {max}.\nPress any key to continue");
             Console.ReadKey();
             return -1;
@@ -65,15 +65,16 @@ class Program
 
     int ActionQuery()
     {
+        Console.Clear();
         int selected = -1;
         while (selected == -1)
         {    
-            Console.Clear();
             if (_level > _temp)
             {
                 Console.WriteLine($"\x1b[1;32mYou have leveled up! You are now level {_level}\x1b[0m");
+                _temp = _level;
             }
-            Console.WriteLine($"You have {_score} points, making you level {_level}\n\nMenu options:\n 1. Create New Goal\n 2. List Goals\n 3. Save Goals\n 4. Load Goals\n 5. Record event\n 6. Quit\nSelect a choice from the menu: ");
+            Console.Write($"You have {_score} points, making you level {_level}\n\nMenu options:\n 1. Create New Goal\n 2. List Goals\n 3. Save Goals\n 4. Load Goals\n 5. Record event\n 6. Quit\nSelect a choice from the menu: ");
             selected = ValidNum(1, 6);
         }
         return selected;
@@ -81,6 +82,10 @@ class Program
     void DisplayGoals()
     {
         Console.Clear();
+        if (_goals.Count() == 0)
+        {
+            Console.Write("You have no listed goals");
+        }
         foreach(Goal i in _goals)
         {
             Console.WriteLine(i.GetGoalDetails());
@@ -192,8 +197,9 @@ class Program
                 outputFile.WriteLine(i.GetGoalDetails(save:true));
             }
         }
+        Console.WriteLine("File saved successfully.");
     }
-    bool LoadFile()
+    void LoadFile()
     {
         Console.Write("What is the filename for the goal file? ");
         string load = Console.ReadLine();
@@ -205,7 +211,7 @@ class Program
         {
             Console.WriteLine("File not found.");
             AwaitInput();
-            return false;
+            return;
         }
         string[] lines = System.IO.File.ReadAllLines(load);
         if (lines.Length > 0)
@@ -216,8 +222,10 @@ class Program
             else
             {
                 Console.WriteLine("Error reading score from file.");
-                return false;
+                return;
             }
+        _level = (int)Math.Sqrt(_score/100) + 1;
+        _temp = _level;
         }
         _goals.Clear();
         for (int i = 1; i < lines.Length; i++)
@@ -243,6 +251,6 @@ class Program
                     break;
             }
         }
-        return true;
+        Console.WriteLine("File loaded successfully");
     }
 }
