@@ -22,7 +22,7 @@ public abstract class Goal
     {
         return _points;
     }
-    protected void SetComplete()
+    public void SetComplete()
     {
         _isComplete = true;
     }

@@ -167,15 +167,26 @@ class Program
         {
             save += ".txt";
         }
+        if (System.IO.File.Exists(save))
+        {
+            Console.Write("This file already exists. Do you want to overwrite it? (Y/N): ");
+            string response = Console.ReadLine().ToUpper();
+            if (response != "Y")
+            {
+                Console.WriteLine("Save cancelled.");
+                return;
+            }
+        }
         using (StreamWriter outputFile = new StreamWriter(save))
         {
+            outputFile.WriteLine(_score);
             foreach(Goal i in _goals)
             {
                 outputFile.WriteLine(i.GetGoalDetails(save:true));
             }
         }
     }
-    void LoadFile()
+    bool LoadFile()
     {
         Console.Write("What is the filename for the goal file? ");
         string load = Console.ReadLine();
@@ -183,23 +194,48 @@ class Program
         {
             load += ".txt";
         }
-        string[] lines = System.IO.File.ReadAllLines(load);
-
-        foreach (string line in lines)
+        if (!System.IO.File.Exists(load))
         {
-            string[] parts = line.Split("|");
+            Console.WriteLine("File not found.");
+            AwaitInput();
+            return false;
+        }
+        string[] lines = System.IO.File.ReadAllLines(load);
+        if (lines.Length > 0)
+        {
+            if (int.TryParse(lines[0], out _score))
+            {
+            }
+            else
+            {
+                Console.WriteLine("Error reading score from file.");
+                return false;
+            }
+        }
+        _goals.Clear();
+        for (int i = 1; i < lines.Length; i++)
+        {
+            string[] parts = lines[i].Split("|");
             switch (parts[0])
             {
                 case "Simple":
+                    _goals.Add(new Simple(parts[1], parts[2], int.Parse(parts[3])));
+                    if (bool.Parse(parts[4]))
+                    {
+                        _goals[_goals.Count-1].SetComplete();
+                    }
                     break;
                 case "Eternal":
+                    _goals.Add(new Eternal(parts[1], parts[2], int.Parse(parts[3])));
                     break;
                 case "Checklist":
+                    _goals.Add(new Checklist(parts[1], parts[2], int.Parse(parts[3]), int.Parse(parts[4]), int.Parse(parts[6]), int.Parse(parts[5])));
                     break;
                 default:
-                    // do something uhh
+                    Console.WriteLine($"**Goal #{i+1} is corrupted!**");
                     break;
             }
         }
+        return true;
     }
 }

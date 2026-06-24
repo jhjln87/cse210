@@ -34,7 +34,7 @@ public class Checklist : Goal
         _timesCompleted++;
         return GetPoints();
     }
-    public override string GetGoalDetails(bool save)
+    public override string GetGoalDetails(bool save, bool record)
     {
         if (save)
         {
