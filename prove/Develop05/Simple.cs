@@ -6,7 +6,7 @@ public class Simple : Goal
     public Simple(string goal, string description, int pointsWorth) :base(goal, description, pointsWorth)
     {
     }
-    public override string GetGoalDetails(bool save, bool record)
+    public override string GetGoalDetails(bool save = false, bool record = false)
     {
         if (save)
         {

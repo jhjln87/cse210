@@ -30,11 +30,14 @@ public class Checklist : Goal
             _timesCompleted++;
             SetComplete();
             return _endPoints + GetPoints();
+        } else if (_timesCompleted < _target)
+        {
+            _timesCompleted++;
+            return GetPoints();
         }
-        _timesCompleted++;
-        return GetPoints();
+        return 0;
     }
-    public override string GetGoalDetails(bool save, bool record)
+    public override string GetGoalDetails(bool save = false, bool record = false)
     {
         if (save)
         {
