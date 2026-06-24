@@ -5,6 +5,8 @@ using System.IO;
 class Program
 {
     int _score = 0;
+    int _level;
+    int _temp;
     List<Goal> _goals = new List<Goal>();
     bool _play = true;
     static void Main(string[] args)
@@ -12,6 +14,7 @@ class Program
         Program myProgram = new Program();
         while(myProgram._play)
         {
+            myProgram._level = (int)Math.Sqrt(myProgram._score/100) + 1;
             switch (myProgram.ActionQuery())
             {
                 case 1:
@@ -31,6 +34,7 @@ class Program
                     myProgram.AwaitInput();
                     break;
                 case 5:
+                    myProgram._temp = myProgram._level;
                     myProgram.LogEvent();
                     myProgram.AwaitInput();
                     break;
@@ -63,12 +67,13 @@ class Program
     {
         int selected = -1;
         while (selected == -1)
+        Console.Clear();
+        if (_level > _temp)
         {
-            Console.Clear();
-            Console.WriteLine($"You have {_score} points\n\nMenu options:\n 1. Create New Goal\n 2. List Goals\n 3. Save Goals\n 4. Load Goals\n 5. Record event\n 6. Quit\nSelect a choice from the menu: ");
-            selected = ValidNum(1, 6);
+            Console.WriteLine($"\x1b[1;32mYou have leveled up! You are now level {_level}\x1b[0m");
         }
-
+        Console.WriteLine($"You have {_score} points, making you level {_level}\n\nMenu options:\n 1. Create New Goal\n 2. List Goals\n 3. Save Goals\n 4. Load Goals\n 5. Record event\n 6. Quit\nSelect a choice from the menu: ");
+        selected = ValidNum(1, 6);
         return selected;
     }
     void DisplayGoals()
