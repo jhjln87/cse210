@@ -67,13 +67,15 @@ class Program
     {
         int selected = -1;
         while (selected == -1)
-        Console.Clear();
-        if (_level > _temp)
-        {
-            Console.WriteLine($"\x1b[1;32mYou have leveled up! You are now level {_level}\x1b[0m");
+        {    
+            Console.Clear();
+            if (_level > _temp)
+            {
+                Console.WriteLine($"\x1b[1;32mYou have leveled up! You are now level {_level}\x1b[0m");
+            }
+            Console.WriteLine($"You have {_score} points, making you level {_level}\n\nMenu options:\n 1. Create New Goal\n 2. List Goals\n 3. Save Goals\n 4. Load Goals\n 5. Record event\n 6. Quit\nSelect a choice from the menu: ");
+            selected = ValidNum(1, 6);
         }
-        Console.WriteLine($"You have {_score} points, making you level {_level}\n\nMenu options:\n 1. Create New Goal\n 2. List Goals\n 3. Save Goals\n 4. Load Goals\n 5. Record event\n 6. Quit\nSelect a choice from the menu: ");
-        selected = ValidNum(1, 6);
         return selected;
     }
     void DisplayGoals()
