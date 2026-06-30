@@ -52,12 +52,12 @@ To meet your exact final project requirements, we will break the C# application 
                          ┌───────────────────────────┐
                          │       MetricSource        │ (Abstract Base)
                          └─────────────┬─────────────┘
-                                       │
-                ┌──────────────────────┴──────────────────────┐
-                ▼                                             ▼
-     ┌────────────────────┐                        ┌────────────────────┐
-     │     CpuMetric      │                        │     RamMetric      │ (Derived)
-     └────────────────────┘                        └────────────────────┘
+                                           │
+             ┌──────────────────────┴──────────────────────┐
+             ▼                                                          ▼
+  ┌────────────────────┐                        ┌────────────────────┐
+  │     CpuMetric            │                        │     RamMetric      │ (Derived)
+  └────────────────────┘                        └────────────────────┘
 
 
 1. The Data Layer (Inheritance & Polymorphism)
